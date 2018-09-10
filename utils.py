@@ -1,9 +1,5 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Thu May 17 09:31:42 2018
 
-@author: Lenovo
-"""
 import numpy as np
 from PIL import Image
 from random import randint
