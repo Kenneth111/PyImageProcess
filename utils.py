@@ -102,11 +102,12 @@ def get_all_pics(img, h1, w1):
             yield (i, j, cropped_img)
 
 # yuv: a n*3 matrix
-def save_img(filename, yuv, height, width):
-    rgb_frame = yuv_to_rgb(yuv).reshape(height, width, 3)
+def save_rgb(filename, rgb, height, width):
+    rgb_frame = rgb.reshape(height, width, 3)
     img = Image.fromarray(rgb_frame)
     img.save(filename)
-    
+
+# yuv: an n by 3 matrix    
 def save_yuv(filename, yuv):
     with open(filename, "wb") as f:
         f.write(bytearray(yuv[:, 0].tolist()))
