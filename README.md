@@ -44,12 +44,12 @@ Convert RGB to YUV. The conversion formula can be found [here](https://www.vocal
 
 **return**: an n by 3 matrix containing Y, U and V seperately.
 
-### save_img(filename, yuv, height, width)
-Save a YUV frame to a file. The YUV frame will be converted to a RGB frame and saved to a file.
+### save_rgb(filename, rgb, height, width)
+Save a RGB frame to a file.
 
 **filename**: The file name, like "test.bmp".
 
-**yuv**: a n by 3 matrix containing Y, U and V seperately.
+**rgb**: a n by 3 matrix containing R, G and B seperately.
 
 ### get_random_pics(img, h, w, num)
 This function is developed for training a deep neural network. It can extract a number of patches from a picture. In addtion, this function is a generator and can be used in a for loop.
