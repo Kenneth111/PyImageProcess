@@ -44,9 +44,9 @@ def get_all_frames(filename, height, width, num_frames):
 # return a n * 3 matrix
 def yuv_to_rgb(yuv_frame):
     rgb_frame = np.copy(yuv_frame)
-    v1 = [1.164, 0, 1.596]
-    v2 = [1.164, -0.391, -0.813]
-    v3 = [1.164, 2.018, 0]    
+    v1 = [1.000, 0.001, 1.574]
+    v2 = [1.000, -0.187, -0.469]
+    v3 = [1.000, 1.856, 0.001]    
     mat1 = np.array([v1, v2, v3])
     mat1 = mat1.T
     v4 = np.array([[16, 128, 128]], dtype="uint8")
@@ -57,9 +57,9 @@ def yuv_to_rgb(yuv_frame):
 # return a n*3 matrix
 def rgb_to_yuv(rgb_frame):
     yuv_frame = np.copy(rgb_frame)
-    v1 = [0.257, 0.504, 0.098]
-    v2 = [-0.148, -0.291, 0.439]
-    v3 = [0.439, -0.368, 0.071]    
+    v1 = [0.213, 0.715, 0.072]
+    v2 = [-0.115, -0.385, 0.500]
+    v3 = [0.500, -0.454, -0.046]    
     mat1 = np.array([v1, v2, v3])
     mat1 = mat1.T
     v4 = np.array([[16, 128, 128]], dtype="uint8")
@@ -107,3 +107,8 @@ def save_img(filename, yuv, height, width):
     img = Image.fromarray(rgb_frame)
     img.save(filename)
     
+def save_yuv(filename, yuv):
+    with open(filename, "wb") as f:
+        f.write(bytearray(yuv[:, 0].tolist()))
+        f.write(bytearray(yuv[:, 1].tolist()))
+        f.write(bytearray(yuv[:, 2].tolist()))
