@@ -73,7 +73,8 @@ def rgb_to_yuv(rgb_frame):
 # height: the height of the img
 # width: the width of the img
 # h1, w1: the height and width of the pic to be saved
-def get_random_pics(img, height, width, h1, w1, num):
+def get_random_pics(img, h1, w1, num):
+    (width, height) = img.size
     for i in range(num):
         h_start = randint(0, height - h1 - 1)
         w_start = randint(0, width - w1 -1)
@@ -83,17 +84,18 @@ def get_random_pics(img, height, width, h1, w1, num):
 
 # img: an Image object
 # return: an ndarray num * h1 * w1 * 3
-def get_batch_pics(img, height, width, h1, w1, num):
+def get_batch_pics(img, h1, w1, num):
     batch_pics = np.zeros((num, h1, w1, 3))
     batch_num = 0
-    for pic in get_random_pics(img, height, width, h1, w1, num):
+    for pic in get_random_pics(img, h1, w1, num):
         # pic: (h1, w1, 3)
         batch_pics[batch_num, :, :, :] = np.asarray(pic)
         batch_num += 1
     return batch_pics
 
 # img: an Image object
-def get_all_pics(img, height, width, h1, w1):
+def get_all_pics(img, h1, w1):
+    (width, height) = img.size
     for i in range(0, height, h1):
         for j in range(0, width, w1):
             cropped_img = img.crop((j, i, j + w1, i + h1))
