@@ -113,3 +113,18 @@ def save_yuv(filename, yuv):
         f.write(bytearray(yuv[:, 0].tolist()))
         f.write(bytearray(yuv[:, 1].tolist()))
         f.write(bytearray(yuv[:, 2].tolist()))
+
+# file1: string
+# file2: string
+# diff_file: where to save the comparison result
+def show_img_diff(file1, file2, diff_file):
+    img1 = Image.open(file1)
+    img2 = Image.open(file2)
+    if img1.size != img2.size:
+        print("the size of file1 is different from the size of file2")
+        return
+    rgb_img1 = np.array(img1)
+    rgb_img2 = np.array(img2)
+    diff_img = abs(rgb_img1 - rgb_img2)
+    img3 = Image.fromarray(diff_img)
+    img3.save(diff_file)

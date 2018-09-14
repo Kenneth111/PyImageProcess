@@ -1,6 +1,6 @@
 from PIL import Image
 import numpy as np
-from utils import rgb_to_yuv, yuv_to_rgb, get_a_frame, get_batch_pics, save_rgb, save_yuv
+from utils import rgb_to_yuv, yuv_to_rgb, get_a_frame, get_batch_pics, save_rgb, save_yuv, show_img_diff
 
 def demo_get_batch_pics():
     img = Image.open("172.png")
@@ -16,6 +16,10 @@ def demo_yuv_rgb():
 def main():
     demo_get_batch_pics()
     demo_yuv_rgb()
+    file1 = r'1080.bmp'
+    file2 = r'20x1080.bmp'
+    diff_file = r'diff.bmp'
+    show_img_diff(file1, file2, diff_file)
 
 if __name__ == "__main__":
     main()
