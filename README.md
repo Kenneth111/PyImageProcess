@@ -84,6 +84,15 @@ This function is developed for training a deep neural network. It extracts (heig
 
 **w** : the width of a patch
 
+### show_img_diff(file1, file2, diff_file)
+Compare two images and save the difference between these images into a new image file.
+
+**file1**: the first image file to compare (string)
+
+**file2**: the second image file to compare (string)
+
+**diff_file**: where to save the difference (string)
+
 ## transform.py
 ### dct2(a)
 2-d discrete cosine transform. This function can be found [here](https://inst.eecs.berkeley.edu/~ee123/sp16/Sections/JPEG_DCT_Demo.html).
