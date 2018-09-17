@@ -14,14 +14,17 @@ def demo_yuv_rgb():
     save_rgb("test.bmp", rgb_frame, 1080, 1920)
     yuv_frame1 = rgb_to_yuv(rgb_frame)
     save_yuv("test1.yuv", yuv_frame1)
-
-def main():
-    demo_get_batch_pics()
-    demo_yuv_rgb()
+    
+def save_rgb_diff():
     file1 = r'1080.bmp'
     file2 = r'20x1080.bmp'
     diff_file = r'diff.bmp'
     show_img_diff(file1, file2, diff_file)
+
+def main():
+    demo_get_batch_pics()
+    demo_yuv_rgb()
+    save_rgb_diff()
 
 if __name__ == "__main__":
     main()
