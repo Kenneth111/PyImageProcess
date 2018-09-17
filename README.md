@@ -8,49 +8,6 @@ Dependencies:
 * scipy
 
 ## utils.py
-### get_a_frame(filename, height, width, frameId)
-Extract an frame from a YUV file. This function returns an n by 3 matrix containing Y, U and V components.
-
-**filename**: a string, like "capture.yuv"
-
-**height**: the frame's height
-
-**width**: the frame's width
-
-**frameId**: the frame number to be extracted, starting from 1
-
-### get_all_frames(filename, height, width, num_frames)
-Extract all the frames and their corrsponding frame ID in a YUV file. This function is a generator and therefore can be used in a for loop.
-
-**filename**: a string, like "capture.yuv"
-
-**height**: the frame's height
-
-**width**: the frame's width
-
-**num_frames**: how many frames in the YUV file
-
-### yuv_to_rgb(yuv_frame)
-Convert YUV to RGB . The conversion formula can be found [here](https://www.vocal.com/video/rgb-and-yuv-color-space-conversion/).
-
-**yuv_frame**: an n by 3 matrix containing Y, U and V seperately.
-
-**return**: an n by 3 matrix containing R, G and B seperately.
-
-### rgb_to_yuv(rgb_frame)
-Convert RGB to YUV. The conversion formula can be found [here](https://www.vocal.com/video/rgb-and-yuv-color-space-conversion/).
-
-**rgb_frame**: an n by 3 matrix containing R, G, and B seperately.
-
-**return**: an n by 3 matrix containing Y, U and V seperately.
-
-### save_rgb(filename, rgb, height, width)
-Save a RGB frame to a file.
-
-**filename**: The file name, like "test.bmp".
-
-**rgb**: a n by 3 matrix containing R, G and B seperately.
-
 ### get_random_pics(img, h, w, num)
 This function is developed for training a deep neural network. It can extract a number of patches from a picture. In addtion, this function is a generator and can be used in a for loop.
 
@@ -84,6 +41,37 @@ This function is developed for training a deep neural network. It extracts (heig
 
 **w** : the width of a patch
 
+## utils_yuv.py
+### get_a_frame(filename, height, width, frameId)
+Extract an frame from a YUV file. This function returns an n by 3 matrix containing Y, U and V components.
+
+**filename**: a string, like "capture.yuv"
+
+**height**: the frame's height
+
+**width**: the frame's width
+
+**frameId**: the frame number to be extracted, starting from 1
+
+### get_all_frames(filename, height, width, num_frames)
+Extract all the frames and their corrsponding frame ID in a YUV file. This function is a generator and therefore can be used in a for loop.
+
+**filename**: a string, like "capture.yuv"
+
+**height**: the frame's height
+
+**width**: the frame's width
+
+**num_frames**: how many frames in the YUV file
+
+### yuv_to_rgb(yuv_frame)
+Convert YUV to RGB . The conversion formula can be found [here](https://www.vocal.com/video/rgb-and-yuv-color-space-conversion/).
+
+**yuv_frame**: an n by 3 matrix containing Y, U and V seperately.
+
+**return**: an n by 3 matrix containing R, G and B seperately.
+
+## utils_rgb.py
 ### show_img_diff(file1, file2, diff_file)
 Compare two images and save the difference between these images into a new image file.
 
@@ -92,6 +80,20 @@ Compare two images and save the difference between these images into a new image
 **file2**: the second image file to compare (string)
 
 **diff_file**: where to save the difference (string)
+
+### rgb_to_yuv(rgb_frame)
+Convert RGB to YUV. The conversion formula can be found [here](https://www.vocal.com/video/rgb-and-yuv-color-space-conversion/).
+
+**rgb_frame**: an n by 3 matrix containing R, G, and B seperately.
+
+**return**: an n by 3 matrix containing Y, U and V seperately.
+
+### save_rgb(filename, rgb, height, width)
+Save a RGB frame to a file.
+
+**filename**: The file name, like "test.bmp".
+
+**rgb**: a n by 3 matrix containing R, G and B seperately.
 
 ## transform.py
 ### dct2(a)
