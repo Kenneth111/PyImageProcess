@@ -1,6 +1,8 @@
 from PIL import Image
 import numpy as np
-from utils import rgb_to_yuv, yuv_to_rgb, get_a_frame, get_batch_pics, save_rgb, save_yuv, show_img_diff
+from utils import get_batch_pics
+from utils_rgb import rgb_to_yuv, save_rgb, show_img_diff
+from utils_yuv import yuv_to_rgb, get_a_frame, save_yuv
 
 def demo_get_batch_pics():
     img = Image.open("172.png")
