@@ -56,3 +56,14 @@ def get_all_frames(filename, height, width, num_frames):
             u = np.asarray(u)
             v = np.asarray(v)
             yield np.vstack([y, u, v]).T, i
+
+# yuv: height * width * 3
+def save_a_patch(filename, startX, startY,  height, width, yuv):
+    c = len(yuv.shape)
+    if c != 3:
+        return -1
+    (h, w, c) = yuv.shape
+    if startX + width > w or startY + height > h or c != 3:
+        return -2
+    save_yuv(filename, yuv[startY: startY + height, startX: startX + width, :].reshape(-1, 3))
+    return 0
