@@ -3,6 +3,8 @@ import numpy as np
 from utils import get_batch_pics
 from utils_rgb import rgb_to_yuv, save_rgb, show_img_diff
 from utils_yuv import yuv_to_rgb, get_a_frame, save_yuv, save_a_patch
+from jpeg import quantization, in_quantization
+from transform import dct2, idct2
 
 def demo_get_batch_pics():
     img = Image.open("172.png")
@@ -25,12 +27,21 @@ def demo_save_a_patch():
     yuv_frame = get_a_frame("../capture.yuv", 1080, 1920, 1)
     save_a_patch("test_patch.yuv", 0, 0, 16, 16, yuv_frame.reshape(1080, 1920, 3))
 
+def demo_jpeg():
+    yuv_frame = get_a_frame("../capture.yuv", 1080, 1920, 1).reshape(1080, 1920, 3)
+    tmp_frame = np.zeros((1080, 1920), dtype="uint8")
+    for i in range(0, 1080, 8):
+        for j in range(0, 1920, 8):
+            tmp_frame[i: i + 8, j: j+ 8] = idct2(in_quantization(np.int8(quantization(dct2(yuv_frame[i: i+8, j: j+8, 0]), 0)), 0))
+    img = Image.fromarray(tmp_frame)
+    img.save("ddd.bmp")
+
 def main():
     # demo_get_batch_pics()
     # demo_yuv_rgb()
     # demo_save_rgb_diff()
     # demo_save_a_patch()
-    pass
+    demo_jpeg()
 
 if __name__ == "__main__":
     main()
