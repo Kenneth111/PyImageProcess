@@ -1,4 +1,6 @@
 import numpy as np
+from PIL import Image
+from utils_rgb import save_rgb
 
 # yuv: an n by 3 matrix    
 def save_yuv(filename, yuv):
@@ -67,3 +69,15 @@ def save_a_patch(filename, startX, startY,  height, width, yuv):
         return -2
     save_yuv(filename, yuv[startY: startY + height, startX: startX + width, :].reshape(-1, 3))
     return 0
+
+# read frames from a yuv file and save the frame to image files
+# yuv_filename: the yuv file to convert
+# height, width: the height and the width of the yuv file
+# num_frames: how many frames of the yuv file to convert
+# format: such as "jpg", "bmp"
+# img_filename: a string used in image files
+def convertYUV2Img(yuv_filename, height, width, num_frames, format, img_filename):
+    for yuv, i in get_all_frames(yuv_filename, height, width, num_frames):
+        rgb = yuv_to_rgb(yuv)
+        tmp_filename = img_filename + ("-%d.%s" % (i, format))
+        save_rgb(tmp_filename, rgb, height, width)
