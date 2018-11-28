@@ -81,3 +81,37 @@ def convertYUV2Img(yuv_filename, height, width, num_frames, format, img_filename
         rgb = yuv_to_rgb(yuv)
         tmp_filename = img_filename + ("-%d.%s" % (i, format))
         save_rgb(tmp_filename, rgb, height, width)
+
+
+"""
+yuv_frame: (height * width, 3) 
+color: "r", "g" or "b"
+"""
+def yuv_draw_box(yuv_frame, height, width, startx, starty, endx, endy, color):
+    if startx < 0 or starty <0 or endx >= width or endy >= height:
+        return -1
+    if color == "r":
+        yuv_color = (82, 90, 240)
+    elif color == "g":
+        yuv_color = (145, 54, 34)
+    else:
+        yuv_color = (41, 240, 110)
+    dims = len(yuv_frame.shape)
+    if dims == 2:
+        yuv_frame = yuv_frame.reshape(height, width, 3)
+    yuv_frame[starty, startx: endx, 0] = np.ones((1, endx - startx)) * yuv_color[0]
+    yuv_frame[starty, startx: endx, 1] = np.ones((1, endx - startx)) * yuv_color[1]
+    yuv_frame[starty, startx: endx, 2] = np.ones((1, endx - startx)) * yuv_color[2]
+    yuv_frame[endy, startx: endx, 0] = np.ones((1, endx - startx)) * yuv_color[0]
+    yuv_frame[endy, startx: endx, 1] = np.ones((1, endx - startx)) * yuv_color[1]
+    yuv_frame[endy, startx: endx, 2] = np.ones((1, endx - startx)) * yuv_color[2]
+    for h in range(starty, endy):
+        yuv_frame[h, startx, 0] = yuv_color[0]
+        yuv_frame[h, startx, 1] = yuv_color[1]
+        yuv_frame[h, startx, 2] = yuv_color[2]
+        yuv_frame[h, endx, 0] = yuv_color[0]
+        yuv_frame[h, endx, 1] = yuv_color[1]
+        yuv_frame[h, endx, 2] = yuv_color[2]
+    if dims == 2:
+        return yuv_frame.reshape(-1, 3)
+    return yuv_frame

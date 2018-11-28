@@ -71,6 +71,26 @@ Convert YUV to RGB . The conversion formula can be found [here](https://www.voca
 
 **return**: an n by 3 matrix containing R, G and B seperately.
 
+### def convertYUV2Img(yuv_filename, height, width, num_frames, format, img_filename)
+Read frames from a yuv file and save the frame to image files
+
+**yuv_filename**: the yuv file to convert
+
+**height, width**: the height and the width of the yuv file
+
+**num_frames**: how many frames of the yuv file to convert
+
+**format**: such as "jpg", "bmp"
+
+**img_filename**: a string used in image files
+
+### yuv_draw_box(yuv_frame, height, width, startx, starty, endx, endy, color)
+Draw a box on a YUV frame.
+
+**yuv_frame**: a n by 3 matrix containing Y, U and V, seperately, or a (height, width, 3) matrix
+
+**color**: "r", "g" or "b"  
+
 ## utils_rgb.py
 ### show_img_diff(file1, file2, diff_file)
 Compare two images and save the difference between these images into a new image file.

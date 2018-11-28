@@ -2,7 +2,7 @@ from PIL import Image
 import numpy as np
 from utils import get_batch_pics
 from utils_rgb import rgb_to_yuv, save_rgb, show_img_diff
-from utils_yuv import yuv_to_rgb, get_a_frame, save_yuv, save_a_patch, convertYUV2Img
+from utils_yuv import yuv_to_rgb, get_a_frame, save_yuv, save_a_patch, convertYUV2Img, yuv_draw_box
 from jpeg import quantization, in_quantization
 from transform import dct2, idct2
 
@@ -36,13 +36,20 @@ def demo_jpeg():
     img = Image.fromarray(tmp_frame)
     img.save("ddd.bmp")
 
+def demo_yuv_draw_box():
+    yuv_frame = get_a_frame("../capture.yuv", 1080, 1920, 1).reshape(1080, 1920, 3)
+    yuv_frame = yuv_draw_box(yuv_frame, 1080, 1920, 100, 120, 220, 250, "r")
+    yuv_frame = yuv_frame.reshape(-1, 3)
+    save_yuv("draw.yuv", yuv_frame)
+
 def main():
     # demo_get_batch_pics()
     # demo_yuv_rgb()
     # demo_save_rgb_diff()
     # demo_save_a_patch()
     # demo_jpeg()
-    convertYUV2Img('d:/capture1.yuv', 1080, 1920, 20, 'bmp', 'dcgan')
+    # convertYUV2Img('d:/capture1.yuv', 1080, 1920, 20, 'bmp', 'dcgan')
+    demo_yuv_draw_box()
 
 if __name__ == "__main__":
     main()
