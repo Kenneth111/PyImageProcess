@@ -12,10 +12,11 @@ def zigzag(N):
         zz_mtx = np.zeros((N,N))
     except TypeError as err:
         print("N must be an integer, error msg: {0}".format(err))
+        return -1
     except ValueError as err:
         print("N must be larger than 0, error msg: {0}".format(err))
-    finally:
         return -1
+
     for n in range(2,N+2):
         zz_mtx[n-2, 0] = 1/2*((-1)**n)*(n+((-1)**n)*((n-2)*n+2)-2)
     for i in range(1, N+1):
