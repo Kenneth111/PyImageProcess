@@ -1,6 +1,6 @@
 import numpy as np
 from PIL import Image
-from utils_rgb import save_rgb
+from .utils_rgb import save_rgb
 
 # yuv: an n by 3 matrix    
 def save_yuv(filename, yuv):
@@ -25,20 +25,14 @@ def yuv_to_rgb(yuv_frame):
 
 # return a n * 3 matrix
 def get_a_frame(filename, height, width, frameId):
-    y = bytes()
-    u = bytes()
-    v = bytes()
     with open(filename, "rb") as f:
         f.seek(height * width * 3 * (frameId - 1))
         y = f.read(height * width)
         u = f.read(height * width)
         v = f.read(height * width)
-    y = list(y)
-    u = list(u)
-    v = list(v)
-    y = np.asarray(y)
-    u = np.asarray(u)
-    v = np.asarray(v)
+    y = np.frombuffer(y, dtype="uint8")
+    u = np.frombuffer(u, dtype="uint8")
+    v = np.frombuffer(v, dtype="uint8")
     return np.vstack([y, u, v]).T
 
 # return a n * 3 matrix
