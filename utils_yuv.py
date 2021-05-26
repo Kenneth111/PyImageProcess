@@ -23,13 +23,15 @@ def yuv_to_rgb(yuv_frame):
     rgb_frame = np.clip(np.matmul(rgb_frame, mat1), 0, 255)
     return np.uint8(rgb_frame.reshape(yuv_frame.shape))
 
-# return a n * 3 matrix
-def get_a_frame(filename, height, width, frameId):
-    with open(filename, "rb") as f:
-        f.seek(height * width * 3 * (frameId - 1))
-        y = f.read(height * width)
-        u = f.read(height * width)
-        v = f.read(height * width)
+def get_a_frame(filename: str, height: int, width: int, frame_id: int):
+    """
+    return a n * 3 matrix
+    """
+    with open(filename, "rb") as f_in:
+        f_in.seek(height * width * 3 * (frame_id - 1))
+        y = f_in.read(height * width)
+        u = f_in.read(height * width)
+        v = f_in.read(height * width)
     y = np.frombuffer(y, dtype="uint8")
     u = np.frombuffer(u, dtype="uint8")
     v = np.frombuffer(v, dtype="uint8")
