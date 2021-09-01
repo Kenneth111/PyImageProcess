@@ -9,6 +9,12 @@ def save_yuv(filename, yuv):
         f.write(bytearray(yuv[:, 1].tolist()))
         f.write(bytearray(yuv[:, 2].tolist()))
 
+def save_yuv_420(filename, y, u, v):
+    with open(filename, "wb") as f:
+        f.write(bytearray(y.tolist()))
+        f.write(bytearray(u.tolist()))
+        f.write(bytearray(v.tolist()))
+
 #ref: https://www.vocal.com/video/rgb-and-yuv-color-space-conversion/
 # return a n * 3 matrix
 def yuv_to_rgb(yuv_frame):
@@ -36,6 +42,17 @@ def get_a_frame(filename: str, height: int, width: int, frame_id: int):
     u = np.frombuffer(u, dtype="uint8")
     v = np.frombuffer(v, dtype="uint8")
     return np.vstack([y, u, v]).T
+
+def get_a_frame_420(filename: str, height: int, width: int, frame_id: int):
+    with open(filename, "rb") as f_in:
+        f_in.seek( ((height * width * 3) >> 1) * (frame_id - 1))
+        y = f_in.read(height * width)
+        u = f_in.read( (height * width) >> 2)
+        v = f_in.read( (height * width) >> 2)
+    y = np.frombuffer(y, dtype="uint8")
+    u = np.frombuffer(u, dtype="uint8")
+    v = np.frombuffer(v, dtype="uint8")
+    return (y, u, v)
 
 # return a n * 3 matrix
 def get_all_frames(filename, height, width, num_frames):
