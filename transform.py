@@ -7,6 +7,14 @@ def dct2(a):
 def idct2(a):
     return idct( idct( a, axis=0 , norm='ortho'), axis=1 , norm='ortho')
 
+mat_wht4x4 = np.array([[1, 1, 1, 1],[1, -1, 1, -1],[1, 1, -1, -1],[1, -1, -1, 1]]) / 2
+
+def wht4x4(a):
+    return np.dot(a, mat_wht4x4)
+
+def iwht4x4(a):
+    return np.dot(a, mat_wht4x4)
+
 def zigzag(N):
     try:
         zz_mtx = np.zeros((N,N))
